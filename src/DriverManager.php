@@ -166,14 +166,14 @@ class DriverManager extends Manager
     /**
      * Create an instance of the Twillo driver.
      *
-     * @return TwilioSMS
+     * @return Client
      */
     protected function createTwilioDriver()
     {
         $config = $this->app['config']->get('sms.twilio', []);
 
         return new TwilioSMS(
-            new \Services_Twilio($config['account_sid'], $config['auth_token']),
+            new \Twilio\Rest\Client($config['account_sid'], $config['auth_token']),
             $config['auth_token'],
             $this->app['request']->url(),
             $config['verify']
